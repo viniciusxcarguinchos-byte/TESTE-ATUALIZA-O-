@@ -1,0 +1,152 @@
+{
+  "project_overview": {
+    "name": "Elegance Barbershop - Premium Single Page Upgrade Blueprint",
+    "stack": ["React.js", "Tailwind CSS", "Framer Motion", "Lenis"],
+    "archetype": "Luxury / Swiss High-Contrast Editorial",
+    "theme": "Dark Editorial",
+    "file_type_convention": ".jsx / .js files (not .tsx)"
+  },
+  "existing_design_tokens": {
+    "colors": {
+      "ink": "#0A0A0B",
+      "graphite": "#1C1C20",
+      "bone": "#F3EFE7",
+      "gold": "#C9A961",
+      "champagne": "#E4CF9B"
+    },
+    "fonts": {
+      "heading": "Cormorant Garamond, Georgia, serif",
+      "body": "Manrope, system-ui, sans-serif"
+    },
+    "motion_helpers": {
+      "reveal": "Fade and slide-up on scroll with cubic-bezier(0.22, 1, 0.36, 1)",
+      "mask_line": "Text rises from clip mask",
+      "eyebrow": "Uppercase label with gold tick indicator"
+    },
+    "utilities": {
+      "grain": ".grain SVG turbulence noise overlay",
+      "underline": ".link-underline animated bottom stroke"
+    }
+  },
+  "silk_animated_backgrounds": {
+    "description": "CSS-only liquid silk lighting for dead pure-black sections. Low-opacity gold/champagne ambient glows over ink background.",
+    "performance": "CSS hardware-accelerated animations, zero JS runtime cost, respects prefers-reduced-motion.",
+    "variants": [
+      {
+        "id": "silk-corner-glow",
+        "name": "Corner Ambient Glow",
+        "usage": "Visagismo section background, section headers, subtle side accents",
+        "css_recipe": "bg-ink relative overflow-hidden before:absolute before:-top-40 before:-right-40 before:w-[500px] before:h-[500px] before:rounded-full before:bg-[radial-gradient(circle,rgba(201,169,97,0.08)_0%,rgba(228,207,155,0.03)_45%,transparent_70%)] before:animate-silk-pulse pointer-events-none",
+        "keyframes": "@keyframes silkPulse { 0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.7; } 50% { transform: scale(1.15) translate(-20px, 20px); opacity: 1; } }"
+      },
+      {
+        "id": "silk-wave-sweep",
+        "name": "Centered Silk-Wave Sweep",
+        "usage": "Elegance Membership section hero container background",
+        "css_recipe": "bg-ink relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_50%_30%,rgba(228,207,155,0.07)_0%,rgba(201,169,97,0.02)_50%,transparent_80%)] after:absolute after:top-0 after:left-[-100%] after:w-[200%] after:h-full after:bg-[linear-gradient(115deg,transparent_40%,rgba(201,169,97,0.04)_50%,transparent_60%)] after:animate-silk-sweep pointer-events-none",
+        "keyframes": "@keyframes silkSweep { 0% { transform: translateX(-30%); } 50% { transform: translateX(15%); } 100% { transform: translateX(-30%); } }"
+      },
+      {
+        "id": "silk-diagonal-mesh",
+        "name": "Faint Diagonal Mesh",
+        "usage": "Footer, CTA banner, and background for high-density cards",
+        "css_recipe": "bg-ink relative overflow-hidden before:absolute before:-inset-[50%] before:bg-[conic-gradient(from_0deg_at_50%_50%,rgba(201,169,97,0.03)_0deg,transparent_60deg,rgba(228,207,155,0.04)_180deg,transparent_240deg,rgba(201,169,97,0.03)_360deg)] before:animate-silk-rotate pointer-events-none",
+        "keyframes": "@keyframes silkRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"
+      }
+    ],
+    "reduced_motion_rule": "@media (prefers-reduced-motion: reduce) { .animate-silk-pulse, .animate-silk-sweep, .animate-silk-rotate { animation: none !important; opacity: 0.6 !important; } }"
+  },
+  "editorial_visagismo_section": {
+    "title": "VISAGISMO",
+    "subtitle": "A arte de harmonizar cortes e barba com as proporções, ângulos e personalidade do seu rosto.",
+    "layout_spec": {
+      "grid": "grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center min-h-[80vh] py-24 px-6 md:px-12 max-w-7xl mx-auto",
+      "negative_space": "Generous asymmetry: 5 columns text on left/right, 7 columns image display with offset gold detail line",
+      "type_hierarchy": {
+        "eyebrow": "eyebrow text-gold flex items-center gap-2 mb-4 tracking-[0.3em] text-xs uppercase",
+        "h2_heading": "font-serif text-4xl md:text-5xl lg:text-6xl text-bone font-light leading-[1.1] mb-6 tracking-tight",
+        "lead_p": "font-sans text-bone/80 text-base md:text-lg leading-relaxed mb-6 font-light",
+        "feature_bullets": "space-y-4 text-sm md:text-base text-bone/70 tracking-wide font-sans border-l border-gold/30 pl-6 my-8"
+      },
+      "image_treatment": {
+        "src": "/images/elegance/experiencia-interior.avif",
+        "wrapper_class": "relative group rounded-none overflow-hidden border border-gold/20 p-2 bg-graphite/40 backdrop-blur-sm",
+        "aspect_ratio": "aspect-[4/5] md:aspect-[3/4] object-cover w-full filter contrast-[1.05] grayscale-[0.2]",
+        "decorations": "1px gold border frame offset by -8px, subtle grain overlay (.grain), ambient corner lighting glow"
+      },
+      "motion": "Framer Motion Reveal wrapper with staggerChildren: 0.15s, cubic-bezier(0.22, 1, 0.36, 1)"
+    }
+  },
+  "elegance_membership_section": {
+    "title": "ELEGANCE MEMBERSHIP",
+    "subtitle": "A experiência definitiva em cuidados masculinos continuados.",
+    "silk_variant": "silk-wave-sweep",
+    "cards_grid_layout": {
+      "desktop": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6 items-stretch max-w-7xl mx-auto px-4 md:px-8",
+      "mobile": "flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-6 px-4 md:grid",
+      "card_dimensions": "min-w-[280px] sm:min-w-[300px] md:min-w-0 snap-center flex-1 flex flex-col justify-between"
+    },
+    "card_design": {
+      "bg": "bg-graphite/60 backdrop-blur-md border border-gold/20 hover:border-gold/60 transition-all duration-500 rounded-none p-6 md:p-8 relative group overflow-hidden",
+      "type_hierarchy": {
+        "plan_name": "font-serif text-xl md:text-2xl text-bone tracking-wide font-normal mb-1 group-hover:text-champagne transition-colors",
+        "frequency": "text-xs font-sans uppercase tracking-[0.2em] text-gold/80 mb-6 flex items-center gap-2",
+        "price_big": "font-serif text-3xl lg:text-4xl text-bone font-light tracking-tight",
+        "price_unit": "text-xs font-sans text-bone/50 lowercase font-normal ml-1"
+      },
+      "service_icon": "Lucide icon (Scissors, Crown, Sparkles, Shield, Gem) with stroke-gold stroke-[1.25] w-6 h-6 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all",
+      "hover_effect": "Hover lift -translate-y-1.5 shadow-[0_10px_30px_-10px_rgba(201,169,97,0.15)] subtle inner gold glow line"
+    },
+    "medallion_seals": {
+      "description": "Two luxury metallic medallion seals showcasing subscription tier discounts",
+      "seal_1": {
+        "badge": "10% OFF",
+        "label": "Membros Prata / Gold",
+        "style": "w-24 h-24 rounded-full border border-gold/40 bg-gradient-to-br from-graphite via-ink to-graphite flex flex-col items-center justify-center text-center shadow-lg relative before:absolute before:inset-1 before:rounded-full before:border before:border-gold/20"
+      },
+      "seal_2": {
+        "badge": "20% OFF",
+        "label": "Membros Black / VIP",
+        "style": "w-24 h-24 rounded-full border border-champagne/60 bg-gradient-to-br from-gold/20 via-graphite to-ink flex flex-col items-center justify-center text-center shadow-xl relative before:absolute before:inset-1 before:rounded-full before:border before:border-champagne/30"
+      }
+    },
+    "cta_button": {
+      "text": "QUERO SER ELEGANCE",
+      "type": "WhatsApp link with pre-filled message",
+      "style": "inline-flex items-center justify-center gap-3 bg-gold hover:bg-champagne text-ink font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase py-4 px-8 border border-gold transition-all duration-300 shadow-[0_0_20px_rgba(201,169,97,0.2)] hover:shadow-[0_0_30px_rgba(201,169,97,0.4)]"
+    }
+  },
+  "minimal_premium_polish_recipes": {
+    "service_cards": {
+      "border": "1px solid rgba(201, 169, 97, 0.2)",
+      "hover_border": "1px solid rgba(201, 169, 97, 0.6)",
+      "glow": "shadow-[0_4px_20px_rgba(10,10,11,0.8)] hover:shadow-[0_12px_32px_rgba(201,169,97,0.12)]",
+      "hover_lift": "transform hover:-translate-y-1 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+      "image_zoom": "overflow-hidden img:transition-transform img:duration-700 img:ease-out group-hover:img:scale-105"
+    },
+    "gallery_hover": {
+      "overlay": "bg-gradient-to-t from-ink/90 via-ink/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+      "transform": "scale-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+      "caption_reveal": "translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"
+    }
+  },
+  "testing_attributes": {
+    "requirement": "All interactive elements (buttons, links, inputs, cards, tabs) MUST include data-testid attributes.",
+    "convention": "kebab-case role-based attributes",
+    "examples": [
+      "data-testid=\"visagismo-section\"",
+      "data-testid=\"membership-section\"",
+      "data-testid=\"membership-plan-card-1\"",
+      "data-testid=\"membership-whatsapp-cta\"",
+      "data-testid=\"benefit-medallion-10\"",
+      "data-testid=\"service-card-corte\""
+    ]
+  },
+  "instructions_to_main_agent": [
+    "DO NOT rebuild from scratch. Preserve existing structure in App.js and components.",
+    "Ensure all new CSS animation keyframes for liquid silk are added to App.css or index.css.",
+    "Add data-testid to every interactive component.",
+    "Ensure responsive layout on mobile screens (360px, 390px, 414px) without horizontal scroll.",
+    "Respect prefers-reduced-motion for all Framer Motion and CSS keyframe animations."
+  ]
+}

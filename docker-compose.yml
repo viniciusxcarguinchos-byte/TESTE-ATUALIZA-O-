@@ -1,0 +1,41 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: elegance-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    # Sem porta exposta ao host por padrão (só acessível na rede interna).
+    # Para administrar de fora, descomente:
+    # ports:
+    #   - "27017:27017"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: elegance-backend
+    restart: unless-stopped
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      DB_NAME: elegance
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    depends_on:
+      - mongo
+    ports:
+      - "8001:8001"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Em produção, troque para a URL pública do backend (ex.: https://api.seu-dominio.com)
+        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL:-http://localhost:8001}
+    container_name: elegance-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  mongo_data:
